@@ -7,11 +7,13 @@ import Link from "next/link";
 import { signup } from "@/utils/api/auth";
 import useAuthStore from "@/store/authStore";
 import Cookies from "js-cookie";
+import dynamic from "next/dynamic";
 
 const Signup = () => {
   const router = useRouter();
   const { setToken, setUser, isAuthenticated } = useAuthStore();
   const [error, setError] = useState("");
+  const [isClient, setIsClient] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -29,7 +31,7 @@ const Signup = () => {
         setToken(data.access_token);
         setUser(data.user);
         await new Promise((resolve) => setTimeout(resolve, 100));
-        router.push("/dashboard");
+        router.push("/");
       } catch (error) {
         setError("Failed to store authentication data");
       }
@@ -39,12 +41,17 @@ const Signup = () => {
     },
   });
 
+  // Set isClient to true after component mounts
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   // Redirect if already authenticated
   useEffect(() => {
-    if (isAuthenticated()) {
-      router.push("/dashboard");
+    if (isClient && isAuthenticated()) {
+      router.push("/");
     }
-  }, [router, isAuthenticated]);
+  }, [router, isAuthenticated, isClient]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,6 +71,11 @@ const Signup = () => {
     };
     signupMutation.mutate(submitData);
   };
+
+  // Don't render anything until client-side code is ready
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen flex">
@@ -223,4 +235,5 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+// Export the component with dynamic import and no SSR
+export default dynamic(() => Promise.resolve(Signup), { ssr: false });

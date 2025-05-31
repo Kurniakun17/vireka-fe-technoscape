@@ -27,7 +27,7 @@ export function middleware(request) {
   // If authenticated and trying to access auth pages
   if (isAuthenticated && isAuthPage) {
     console.log("Already authenticated, redirecting to dashboard");
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   // Add auth token to request headers if it exists
