@@ -26,12 +26,6 @@ export default function Sidebar() {
               <span>Dashboard</span>
             </Link>
           </div>
-          <div className="p-4 text-gray-600 hover:bg-gray-100 hover:text-gray-900 rounded-xl cursor-pointer transition-all duration-300 border border-gray-200">
-            <div className="flex items-center space-x-3">
-              <Book className="h-5 w-5" />
-              <span>Hospital Reports</span>
-            </div>
-          </div>
         </nav>
       </div>
     </div>
