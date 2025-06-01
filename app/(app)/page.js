@@ -22,9 +22,9 @@ export default function Home() {
           <MapSection />
           <ProvincialBudget />
 
-          <div className="flex w-full gap-6 ">
+          {/* <div className="flex w-full gap-6 ">
             <EconomicTrend />
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col gap-6 items-stretch w-full xl:max-w-sm">
