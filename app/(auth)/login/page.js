@@ -21,12 +21,10 @@ const Login = () => {
     mutationFn: login,
     onSuccess: async (data) => {
       try {
-        
         setToken(data.access_token);
         // Store the user data
         setUser(data.user);
 
-        
         await new Promise((resolve) => setTimeout(resolve, 100));
 
         // Redirect to dashboard

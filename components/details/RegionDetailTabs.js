@@ -143,6 +143,58 @@ export default function RegionDetailTabs({ data }) {
   const aqiStatus = getAQIStatus(data.aqi);
 
   data.budget_allocation = data.budget_allocation || 2305600000;
+  data.diseases = data.diseases || {
+    overview:
+      "Berdasarkan analisis data lingkungan di Jakarta Barat, terdapat risiko kesehatan yang tinggi terkait infeksi saluran pernapasan (ISPA dan Asma) serta potensi penyakit DBD akibat kualitas udara yang buruk dan curah hujan yang tinggi. Masalah kemiskinan juga dapat meningkatkan kerentanan penduduk terhadap penyakit.",
+    diseaseData: [
+      {
+        name: "ISPA",
+        riskLevel: "tinggi",
+        percentage: 0.6,
+        prevention: [
+          "Menggunakan masker saat berada di luar rumah.",
+          "Mengurangi aktivitas di luar saat kualitas udara buruk.",
+          "Meningkatkan ventilasi dan kualitas udara dalam ruangan.",
+        ],
+        explanationWhyItsFeasible:
+          "Kualitas udara yang buruk dengan PM2.5 tinggi (52.2 μg/m³) dan NO2 tinggi (120.354 μg/m³) meningkatkan risiko infeksi saluran pernapasan akut (ISPA).",
+      },
+      {
+        name: "Asma",
+        riskLevel: "tinggi",
+        percentage: 0.5,
+        prevention: [
+          "Hindari pemicu alergi dan polusi udara.",
+          "Gunakan inhaler sesuai resep dokter.",
+          "Lakukan pemeriksaan kondisi kesehatan secara berkala.",
+        ],
+        explanationWhyItsFeasible:
+          "Kadar polutan udara yang tinggi dapat memicu serangan asma, terutama di kalangan individu yang sudah rentan.",
+      },
+      {
+        name: "Dengue (DBD)",
+        riskLevel: "medium",
+        percentage: 0.4,
+        prevention: [
+          "Menguras genangan air di sekitar rumah.",
+          "Menggunakan obat nyamuk dan kawalan biologis.",
+          "Menanam tanaman yang tidak mengundang nyamuk.",
+        ],
+        explanationWhyItsFeasible:
+          "Curah hujan yang tinggi (8.1 mm) dan NDVI yang rendah (0.27) dapat menciptakan kondisi yang mendukung perkembangbiakan nyamuk Aedes aegypti penyebar DBD.",
+      },
+    ],
+  };
+
+  data.jumlah_dokter = data.jumlah_dokter || 2242;
+  data.jumlah_faskes = data.jumlah_faskes || 204;
+  data.jumlah_penduduk = data.jumlah_penduduk || 2440302;
+  data.budget_allocation = data.budget_allocation || 2305600000;
+  data.poverty_index = data.poverty_index || 7.77;
+  data.diseases = data.diseases || {
+    overview:
+      "Berdasarkan analisis data lingkungan di Jakarta Barat, terdapat risiko kesehatan yang tinggi terkait infeksi saluran pernapasan (ISPA dan Asma) serta potensi penyakit DBD akibat kualitas udara yang buruk dan curah hujan yang tinggi. Masalah kemiskinan juga dapat meningkatkan kerentanan penduduk terhadap penyakit.",
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">

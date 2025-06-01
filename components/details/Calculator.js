@@ -4,6 +4,109 @@ import { AlertTriangle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+const reference = {
+  id: 3919,
+  province: "trenggalek",
+  infrastructure: "Placeholder",
+  renewable_energy: "Placeholder",
+  poverty_index: 4.72,
+  ndvi: 0.73,
+  precipitation: 11.8,
+  sentinel: -6.635,
+  no2: 43.395,
+  co: 25.689,
+  so2: 128.348,
+  o3: 0.116,
+  pm25: 22.6,
+  ai_investment_score: 0,
+  period: "2025-05-31",
+  level: "city",
+  aqi: 60,
+  diseases: {
+    overview:
+      "Dengan mempertimbangkan data lingkungan, kelurahan Trenggalek berisiko tinggi terhadap penyakit saluran pernapasan seperti ISPA dan Asma, serta risiko menengah untuk DBD dan Malaria. Hal ini disebabkan oleh kualitas udara yang buruk, yaitu ACQ 60, dan tingkat NO2 dan SO2 yang tinggi, serta curah hujan yang dapat menciptakan habitat bagi vektor penyakit.",
+    diseaseData: [
+      {
+        name: "ISPA",
+        riskLevel: "tinggi",
+        percentage: 0.7,
+        prevention: [
+          "Mengurangi paparan polusi udara dengan menggunakan masker",
+          "Menghindari aktivitas luar ruangan di waktu puncak polusi",
+          "Meningkatkan ventilasi dalam ruangan",
+          "Melakukan pemeriksaan kesehatan secara teratur",
+        ],
+        explanationWhyItsFeasible:
+          "Kualitas udara yang buruk, ditandai dengan AQI 60 dan level PM2.5 yang cukup tinggi (22.6 μg/m³), dapat meningkatkan risiko penyakit saluran pernapasan.",
+      },
+      {
+        name: "Asma",
+        riskLevel: "tinggi",
+        percentage: 0.6,
+        prevention: [
+          "Menghindari pemicu asma seperti asap rokok dan polusi",
+          "Menggunakan inhaler sesuai anjuran dokter",
+          "Menghindari tempat dengan konsentrasi polusi tinggi",
+        ],
+        explanationWhyItsFeasible:
+          "Tingginya konsentrasi NO2 (43.395 μg/m³) dan SO2 (128.348 μg/m³) dapat memicu serangan asma terutama pada populasi rentan.",
+      },
+      {
+        name: "DBD",
+        riskLevel: "sedang",
+        percentage: 0.5,
+        prevention: [
+          "Membunuh jentik di genangan air",
+          "Menggunakan kelambu dan obat nyamuk",
+          "Menghindari tempat penampungan air yang tidak tertutup",
+        ],
+        explanationWhyItsFeasible:
+          "Curah hujan 11.8 mm dapat menciptakan genangan air, sementara NDVI yang relatif baik (0.73) seringkali terkait dengan habitat nyamuk, meningkatkan risiko DBD.",
+      },
+      {
+        name: "Malaria",
+        riskLevel: "sedang",
+        percentage: 0.4,
+        prevention: [
+          "Menggunakan kelambu berinsektisida",
+          "Melakukan pemeriksaan dan pengobatan dini jika terindikasi malaria",
+          "Pengendalian nyamuk di lingkungan sekitar",
+        ],
+        explanationWhyItsFeasible:
+          "Curah hujan dapat meningkatkan populasi nyamuk penyebar malaria. Tingkat kemiskinan yang tinggi juga berkontribusi terhadap kerentanan penyakit.",
+      },
+      {
+        name: "Pneumonia",
+        riskLevel: "medium",
+        percentage: 0.5,
+        prevention: [
+          "Vaksinasi pneumonia",
+          "Konsumsi gizi seimbang untuk meningkatkan imun",
+          "Penghindaran paparan asap dan polutan",
+        ],
+        explanationWhyItsFeasible:
+          "Risiko pneumonia dapat meningkat akibat polusi udara yang tinggi. Pengaruh kualitas udara pada kesehatan pernapasan sangat signifikan.",
+      },
+    ],
+  },
+  kecamatan: null,
+  jumlah_dokter: 870,
+  jumlah_faskes: 93,
+  jumlah_penduduk: 700716,
+  longitude: null,
+  latitude: null,
+  humidity: 97,
+  sunshine_duration: 5,
+  temperature: 25,
+  birth_mortality: 3.15,
+  life_expectancy_rate: 73.18,
+  disease_vulnerability: 225.71,
+  population_density: 1000,
+  evi_characteristics: "mountainous",
+  living_cost: 106.91,
+  budget_allocation: 52586400000,
+};
+
 const povertyIndexScore = (value) => Math.max(0, (15 - value) / 15);
 const environmentalScore = (data) => {
   const aqi_score = Math.max(0, (150 - data.aqi) / 150);
@@ -623,6 +726,20 @@ const GapScoreCalculator = ({ isCompact = false, regionData }) => {
   const [combinedGapScore, setCombinedGapScore] = useState(0);
   const [allocation, setAllocation] = useState(0);
   const [recommendations, setRecommendations] = useState([]);
+
+  regionData.jumlah_dokter = regionData.jumlah_dokter || 2242;
+  regionData.jumlah_faskes = regionData.jumlah_faskes || 204;
+  regionData.humidity = regionData.humidity || 75;
+  regionData.temperature = regionData.temperature || 25;
+  regionData.life_expectancy_rate = regionData.life_expectancy_rate || 75;
+  regionData.living_cost = regionData.living_cost || 106.9;
+  regionData.population_density = regionData.population_density || 1000;
+  regionData.disease_vulnerability = regionData.disease_vulnerability || 3;
+  regionData.birth_mortality = regionData.birth_mortality || 7;
+  regionData.sunshine_duration = regionData.sunshine_duration || 12;
+  regionData.aqi = regionData.aqi || 50;
+  regionData.ndvi = regionData.ndvi || 0.5;
+  regionData.poverty_index = regionData.poverty_index || 7.77;
 
   const handleChipToggle = (paramId) => {
     setSelectedParamIds((prev) =>
