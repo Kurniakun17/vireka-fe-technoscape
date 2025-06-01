@@ -1,9 +1,10 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+
 import { login } from "@/utils/api/auth";
 import useAuthStore from "@/store/authStore";
 
@@ -153,14 +154,14 @@ const Login = () => {
               {loginMutation.isPending ? "Logging in..." : "Log In"}
             </button>
 
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
               <p>
                 Don't have an account?{" "}
                 <Link href="/signup" className="text-primary">
                   Sign Up
                 </Link>
               </p>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

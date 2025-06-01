@@ -9,11 +9,16 @@ import useAuthStore from "@/store/authStore";
 import Cookies from "js-cookie";
 import dynamic from "next/dynamic";
 
+// Preload images
+const heroBanner = "/hero-banner.png";
+const logoVireka = "/logo-vireka.png";
+
 const Signup = () => {
   const router = useRouter();
   const { setToken, setUser, isAuthenticated } = useAuthStore();
   const [error, setError] = useState("");
   const [isClient, setIsClient] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -23,6 +28,33 @@ const Signup = () => {
     phone: "",
     puskesmas_id: "",
   });
+
+  // Preload images
+  useEffect(() => {
+    const loadImages = async () => {
+      try {
+        const [heroImg, logoImg] = await Promise.all([
+          new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = heroBanner;
+            img.onload = resolve;
+            img.onerror = reject;
+          }),
+          new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = logoVireka;
+            img.onload = resolve;
+            img.onerror = reject;
+          }),
+        ]);
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error("Error loading images:", error);
+      }
+    };
+
+    loadImages();
+  }, []);
 
   const signupMutation = useMutation({
     mutationFn: signup,
@@ -73,7 +105,7 @@ const Signup = () => {
   };
 
   // Don't render anything until client-side code is ready
-  if (!isClient) {
+  if (!isClient || !imagesLoaded) {
     return null;
   }
 
@@ -83,11 +115,12 @@ const Signup = () => {
       <div className="w-1/2 bg-blue-600 relative">
         <div className="absolute inset-0 z-10" />
         <Image
-          src="/hero-banner.png"
+          src={heroBanner}
           alt="Hero Banner"
           fill
           className="object-cover"
           priority
+          unoptimized
         />
       </div>
 
@@ -97,11 +130,12 @@ const Signup = () => {
           {/* Logo */}
           <div className="text-center flex gap-4 justify-center items-center mb-8">
             <Image
-              src="/logo-vireka.png"
+              src={logoVireka}
               alt="Logo"
               width={120}
               height={120}
               className=""
+              unoptimized
             />
             <h1 className="text-[60px] font-medium h-fit text-white">Vireka</h1>
           </div>
