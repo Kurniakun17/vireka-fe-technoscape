@@ -16,9 +16,9 @@ export default function TopRows() {
           </div>
         </div>
         <div>
-          <p className="text-gray-600 mb-2 font-medium">Total Anggaran</p>
+          <p className="text-gray-600 mb-2 font-medium">Total Anggaran </p>
           <p className="text-3xl font-bold text-gray-900 mb-1">Rp 186.3T</p>
-          <p className="text-sm text-gray-500">Dialokasikan secara nasional</p>
+          <p className="text-sm text-gray-500">Dialokasikan per tahun secara nasional</p>
         </div>
       </div>
 
@@ -29,7 +29,7 @@ export default function TopRows() {
           </div>
           <div className="text-right">
             <div className="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-2 rounded-xl border border-blue-200">
-              +3.2pts
+              -1.2 pts
             </div>
           </div>
         </div>

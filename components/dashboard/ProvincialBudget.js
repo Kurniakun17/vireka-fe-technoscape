@@ -11,14 +11,14 @@ import {
 
 export default function ProvincialBudget() {
   const provinceData = [
-    { province: "DKI Jakarta", allocation: 45000, shortName: "JKT" },
-    { province: "Jawa Barat", allocation: 38000, shortName: "JABAR" },
-    { province: "Jawa Tengah", allocation: 35000, shortName: "JATENG" },
-    { province: "Jawa Timur", allocation: 42000, shortName: "JATIM" },
-    { province: "Sumatera Utara", allocation: 28000, shortName: "SUMUT" },
-    { province: "Kalimantan Timur", allocation: 25000, shortName: "KALTIM" },
-    { province: "Sulawesi Selatan", allocation: 22000, shortName: "SULSEL" },
-    { province: "Bali", allocation: 18000, shortName: "BALI" },
+    { province: "DKI Jakarta", allocation: 4500, shortName: "JKT" },
+    { province: "Jawa Timur", allocation: 4200, shortName: "JATIM" },
+    { province: "Jawa Barat", allocation: 3800, shortName: "JABAR" },
+    { province: "Jawa Tengah", allocation: 3500, shortName: "JATENG" },
+    { province: "Sumatera Utara", allocation: 2800, shortName: "SUMUT" },
+    { province: "Kalimantan Timur", allocation: 2500, shortName: "KALTIM" },
+    { province: "Sulawesi Selatan", allocation: 2200, shortName: "SULSEL" },
+    { province: "Bali", allocation: 800, shortName: "BALI" },
   ];
 
   return (
@@ -29,11 +29,11 @@ export default function ProvincialBudget() {
             <div className="p-2 bg-gradient-to-r from-[#1FA09D] to-[#16A085] rounded-lg mr-4 ">
               <BarChart className="h-5 w-5 text-white" />
             </div>
-            Alokasi Anggaran Provinsi
+            Peringkat Alokasi Anggaran Provinsi
           </h3>
           <div className="flex items-center space-x-3">
             <div className="w-4 h-4 bg-gradient-to-r from-[#1FA09D] to-[#16A085] rounded-full "></div>
-            <span className="text-gray-600 font-medium">Juta Rupiah</span>
+            <span className="text-gray-600 font-medium">Milyar Rupiah</span>
           </div>
         </div>
         <ResponsiveContainer width="100%" height={320}>
@@ -63,7 +63,10 @@ export default function ProvincialBudget() {
             />
             <Tooltip
               formatter={(value, name, props) => [
-                `Rp ${value.toLocaleString()}M`,
+                `Rp ${value.toLocaleString("id-ID", {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}M`,
                 "Alokasi Anggaran",
               ]}
               labelFormatter={(label) => {

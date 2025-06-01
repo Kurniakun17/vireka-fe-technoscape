@@ -20,12 +20,16 @@ const MapComponent = dynamic(() => import("./MapComponent"), {
 export default function MapSection() {
   return (
     <div className="bg-white rounded-2xl p-8 border border-gray-300">
-      <h3 className="text-xl font-bold text-gray-900 mb-8 flex items-center">
+      <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center">
         <div className="p-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg mr-4 shadow-cyan-500/20">
           <MapPin className="h-5 w-5 text-white" />
         </div>
         Peta Distribusi Infrastruktur Kesehatan Indonesia
       </h3>
+      <p className="text-gray-500 mb-4">
+        Klik provinsi untuk melihat detail data kesehatan di masing-masing
+        provinsi
+      </p>
       <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center h-96 border border-gray-200">
         <MapComponent />
       </div>
