@@ -69,6 +69,7 @@ const Login = () => {
           src="/hero-banner.png"
           alt="Hero Banner"
           fill
+          unoptimized={true}
           className="object-cover"
           priority
         />
@@ -82,6 +83,7 @@ const Login = () => {
             <Image
               src="/logo-vireka.png"
               alt="Logo"
+              unoptimized={true}
               width={120}
               height={120}
               className=""
