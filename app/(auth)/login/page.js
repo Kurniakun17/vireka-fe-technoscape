@@ -13,8 +13,8 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "valvaltrizt@gmail.com",
+    password: "valvinna2908",
   });
 
   const loginMutation = useMutation({

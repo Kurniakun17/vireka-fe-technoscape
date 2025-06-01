@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const login = async (credentials) => {
   try {
-    const response = await axios.post(`${API_URL}/auth/login`, credentials);
+    const response = await axios.post(`${API_URL}/auth/sign-in`, credentials);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to login");
@@ -16,7 +16,7 @@ export const signup = async (userData) => {
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Failed to sign up");
-  }
+}
 };
 
 export const getMe = async (token) => {
