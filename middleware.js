@@ -5,7 +5,9 @@ export function middleware(request) {
   if (
     request.nextUrl.pathname.startsWith("/_next") ||
     request.nextUrl.pathname.startsWith("/api") ||
-    request.nextUrl.pathname.startsWith("/static")
+    request.nextUrl.pathname.startsWith("/static") ||
+    request.nextUrl.pathname === "/logo-vireka.png" ||
+    request.nextUrl.pathname === "/hero-banner.png"
   ) {
     return NextResponse.next();
   }
@@ -46,5 +48,7 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|logo-vireka.png|hero-banner.png).*)",
+  ],
 };
